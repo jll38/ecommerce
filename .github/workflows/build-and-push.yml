@@ -2,10 +2,8 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches: [ "main" ]
-    paths:
-      - 'frontend/**'
-      - 'backend/**'
+    branches:
+      - main
 
 jobs:
   build-and-push:
