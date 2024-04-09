@@ -2,17 +2,24 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.config import DATABASE as db_info
+from colorama import Fore
 
 DATABASE_URL = f"postgresql://{db_info['username']}:{db_info['password']}@{db_info['host']}:{db_info['port']}/{db_info['database']}"
 
-engine = create_engine(DATABASE_URL)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-def get_db():
-    db = SessionLocal()
+def get_db_engine():
     try:
-        yield db
-    finally:
-        db.close()
+        engine = create_engine(DATABASE_URL)
+    except:
+        print(f"{Fore.ERROR}Error creating database engine. {Fore.WHITE}")
+    return engine
+
+def get_session():
+    engine = get_db_engine()
+    session = sessionmaker(bind=engine)
+    return session
+
