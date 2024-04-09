@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Float, Integer, Text, ForeignKey, DateTime, Table
 from sqlalchemy.orm import relationship
-from .database import Base
+from app.db import Base
 from datetime import datetime
 
 class Review(Base):
