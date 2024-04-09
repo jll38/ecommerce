@@ -1,9 +1,10 @@
+import os
 DATABASE = {
     'dialect': 'postgresql',
     'driver': 'psycopg2',
-    'username': 'your_username',
-    'password': 'your_password',
-    'host': '127.0.0.1',
+    'username': os.getenv('POSTGRES_USER'),
+    'password': os.getenv('POSTGRES_PASSWORD'),
+    'host': os.getenv('POSTGRES_HOST'),
     'port': '5432',  # default port for PostgreSQL
-    'database': 'your_database_name',
+    'database': os.getenv('POSTGRES_DB'),
 }
