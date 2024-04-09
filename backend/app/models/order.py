@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from app.db import Base
 from datetime import datetime
 
-class Order(Base):
+class OrderModel(Base):
     __tablename__ = 'orders'
     
     id = Column(Integer, primary_key=True, index=True)
@@ -13,7 +13,7 @@ class Order(Base):
     user = relationship("User", back_populates="orders")
     items = relationship("OrderItem", back_populates="order")
 
-class OrderItem(Base):
+class OrderItemModel(Base):
     __tablename__ = 'order_items'
     
     id = Column(Integer, primary_key=True, index=True)

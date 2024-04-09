@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from app.db import Base
 from datetime import datetime
 
-class Review(Base):
+class ReviewModel(Base):
     __tablename__ = 'reviews'
     
     id = Column(Integer, primary_key=True, index=True)
