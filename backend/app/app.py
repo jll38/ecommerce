@@ -1,18 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.product_router import product_router
+from app.services.user_service import User_Service
 app = FastAPI()
 
+# User_Service.create_user(
+#     {"username": "user", "hashed_password": "password", "is_active": False})
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allows all origins, adjust in production
     allow_credentials=True,
-    allow_methods=["*"], 
-    allow_headers=["*"], 
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(product_router)
+
 
 @app.get("/")
 async def root():

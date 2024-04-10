@@ -1,6 +1,6 @@
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from app.models.product import Product
+from app.models.product import ProductModel as Product
 
 product_router = APIRouter()
 

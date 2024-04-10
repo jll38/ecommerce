@@ -18,7 +18,7 @@ def get_db_engine():
         print(f"{Fore.ERROR}Error creating database engine. {Fore.WHITE}")
     return engine
 
-def get_session():
+def get_db_session():
     engine = get_db_engine()
     session = sessionmaker(bind=engine)
     return session
