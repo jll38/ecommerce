@@ -3,9 +3,9 @@ export interface IProduct {
   product_type: string;
   product_name: string;
   price: number;
-  description?: string; // Optional
+  description: string;
   stock_quantity: number;
-  image_url?: string; // Optional
+  image_url: string;
 }
 
 export interface IOrderItem {
