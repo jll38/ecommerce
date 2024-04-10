@@ -1,0 +1,15 @@
+{
+    "buildCommand": "npm run build",
+    "devCommand": "npm run dev",
+    "installCommand": "npm ci",
+    "builds": [
+      {
+        "src": "next.config.js",
+        "use": "@vercel/next",
+        "config": {
+          "distDir": "dist"
+        }
+      }
+    ],
+    "runtime": "nodejs@18.x"
+  }
