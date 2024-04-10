@@ -6,9 +6,6 @@ from colorama import Fore
 
 DATABASE_URL = f"postgresql://{db_info['username']}:{db_info['password']}@{db_info['host']}:{db_info['port']}/{db_info['database']}"
 
-
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
 
 def get_db_engine():
@@ -20,6 +17,6 @@ def get_db_engine():
 
 def get_db_session():
     engine = get_db_engine()
-    session = sessionmaker(bind=engine)
+    session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     return session
 

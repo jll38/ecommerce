@@ -1,12 +1,18 @@
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from app.models.product import ProductModel as Product
+from app.models.pydantic.product import ProductSchema as Product
 
 product_router = APIRouter()
 
 #Placeholder for DB
 products_db = {
-    "1": {"product_id": "1", "product_type": "shirt", "product_name": "Muscle Shirt"}
+    "1": {
+        "product_id": "1",
+        "product_type": "shirt",
+        "product_name": "Muscle Shirt",
+        "price": 29.99,  # Added required price field
+        "stock_quantity": 100  # Added required stock_quantity field
+    }
 }
 
 @product_router.get("/product", response_model=list[Product])

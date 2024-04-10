@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from app.models.user import UserModel
-from db import get_db_session
+from app.models.sqlalchemy.user import UserModel
+from app.db import get_db_session
 
 
 class User_Service(BaseModel):
