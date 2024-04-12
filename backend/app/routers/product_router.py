@@ -23,7 +23,7 @@ def read_products():
 
 @product_router.get("/product/{product_id}", response_model=Product)
 def read_product(product_id: str):
-    return Product_Service.retreive_product(product_id)
+    return Product_Service.retrieve_product(product_id)
 
 @product_router.post("/product/{product_id}/cart")
 def add_product_to_cart(product_id: str):

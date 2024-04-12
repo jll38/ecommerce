@@ -16,7 +16,7 @@ products_db = {
 class Product_Service(BaseModel):
 
     @staticmethod
-    def retrieve_product(self, product_id):
+    def retrieve_product(product_id):
         product = products_db.get(product_id)
         if not product:
             raise HTTPException(status_code=404, detail="Product not found")
@@ -33,4 +33,4 @@ class Product_Service(BaseModel):
                 "method": "POST"
             }
         }
-        return {**product, "links": links}
+        return {**product, "_links": links}

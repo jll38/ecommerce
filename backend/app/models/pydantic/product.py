@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class ProductSchema(BaseModel):
+class ProductSchema(BaseModel, extra='allow'):
     product_id: str
     product_type: str
     product_name: str
@@ -12,3 +12,4 @@ class ProductSchema(BaseModel):
 
     class Config:
         orm_mode = True
+        
