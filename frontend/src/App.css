@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #sub-nav {
   height: 40px;
   width: 100%;
@@ -24,19 +28,27 @@
   justify-content: center;
 }
 
-#main-nav{
+#main-nav {
   display: flex;
   justify-content: center;
   background-color: rgb(28, 28, 28);
-
 }
 #main-nav ul {
-  color:white;
-  width:100%;
+  color: white;
+  width: 100%;
   max-width: 1000px;
   list-style-type: none;
   display: inline-flex;
   justify-content: space-between;
   padding: 0 4rem;
-
+}
+main {
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+main section {
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem 4rem;
 }
