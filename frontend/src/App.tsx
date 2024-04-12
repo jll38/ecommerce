@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { Helmet } from "react-helmet";
 
 function App() {
+  const navLinks = [
+    {
+      label: "New Arrivals",
+      href: "/new-arrivals",
+    },
+    {
+      label: "Tops",
+      href: "/tops",
+    },
+    {
+      label: "Bottoms",
+      href: "/bottoms",
+    },
+    {
+      label: "Shoes",
+      href: "/shoes",
+    },
+    {
+      label: "Sale",
+      href: "/sale",
+    },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav id="sub-nav">
+        <ul>
+          <li>Register</li>
+          <li>Free Shipping on Orders Over US$ 100</li>
+          <li>Login</li>
+        </ul>
+      </nav>
+      <nav id="main-nav">
+        <ul>
+          {navLinks.map(link =>(<li key={link.label}>{link.label}</li>))}
+        </ul>
+      </nav>
     </div>
   );
 }
