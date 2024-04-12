@@ -1,6 +1,7 @@
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from app.models.pydantic.product import ProductSchema as Product
+from app.services.product_service import Product_Service
 
 product_router = APIRouter()
 
@@ -22,23 +23,7 @@ def read_products():
 
 @product_router.get("/product/{product_id}", response_model=Product)
 def read_product(product_id: str):
-    product = products_db.get(product_id)
-    if not product:
-        raise HTTPException(status_code=404, detail="Product not found")
-    links = {
-        "self": {
-            "href": f"http://localhost:8080/product/{product_id}"
-        },
-        "add_to_cart": {
-            "href": f"http://localhost:8080/cart/add/{product_id}",
-            "method": "POST"
-        },
-        "post_review": {
-            "href": f"http://localhost:8080/product/{product_id}/review",
-            "method": "POST"
-        }
-    }
-    return {**product, "links": links}
+    return Product_Service.retreive_product(product_id)
 
 @product_router.post("/product/{product_id}/cart")
 def add_product_to_cart(product_id: str):
