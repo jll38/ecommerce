@@ -16,12 +16,12 @@ products_db = {
     }
 }
 
-@product_router.get("/product", response_model=list[Product])
+@product_router.get("/products", response_model=list[Product])
 def read_products():
     # Convert products_db to a list of Product models
     return [Product(**product) for product_id, product in products_db.items()]
 
-@product_router.get("/product/{product_id}", response_model=Product)
+@product_router.get("/products/{product_id}", response_model=Product)
 def read_product(product_id: str):
     return Product_Service.retrieve_product(product_id)
 
