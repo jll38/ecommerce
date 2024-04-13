@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from fastapi import APIRouter, FastAPI, HTTPException
-
+from app.db import get_db_session
 # Placeholder for DB
 products_db = {
     "1": {
@@ -12,6 +12,7 @@ products_db = {
     }
 }
 
+db = get_db_session()
 
 class Product_Service(BaseModel):
 

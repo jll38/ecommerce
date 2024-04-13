@@ -7,9 +7,10 @@ Base = declarative_base()
 
 class CategoryModel(Base):
     __tablename__ = 'categories'
+    __table_args__ = {'extend_existing': True}
     
-    id = Column("id", Integer, primary_key=True, index=True)
-    name = Column("category_name", String, nullable=False)
-    description = Column("description", Text, nullable=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    description = Column(Text, nullable=True)
     
-    products = relationship("Product", back_populates="category")
+    products = relationship("ProductModel", back_populates="category")

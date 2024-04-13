@@ -9,7 +9,7 @@ class OrderItemSchema(BaseModel):
     quantity: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class OrderSchema(BaseModel):
     id: int
@@ -18,4 +18,4 @@ class OrderSchema(BaseModel):
     items: List[OrderItemSchema] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True

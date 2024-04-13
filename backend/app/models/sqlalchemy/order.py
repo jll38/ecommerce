@@ -20,7 +20,7 @@ class OrderItemModel(Base):
     
     id = Column("id", Integer, primary_key=True, index=True)
     order_id = Column("order_id", Integer, ForeignKey('orders.id'))
-    product_id = Column("order_id", Integer, ForeignKey('products.id'))
+    product_id = Column("product_id", Integer, ForeignKey('products.id'))
     quantity = Column("quantity", Integer, nullable=False)
     
     order = relationship("Order", back_populates="items")

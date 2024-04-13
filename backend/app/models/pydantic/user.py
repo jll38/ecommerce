@@ -8,4 +8,4 @@ class UserSchema(BaseModel):
     is_active: Optional[bool] = True
 
     class Config:
-        orm_mode = True
+        from_attributes = True

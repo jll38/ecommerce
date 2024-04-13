@@ -7,16 +7,25 @@ Base = declarative_base()
 
 class ProductModel(Base):
     __tablename__ = 'products'
-    product_id = Column("id", String, primary_key=True, index=True)
-    product_type = Column("product_type", String, index=True)
-    product_name = Column("product_name", String)
-    price = Column("product_price", Float, nullable=False)
-    description = Column("product_description", Text, nullable=True)
-    image_url = Column("image_url", String, nullable=True)
+    __table_args__ = {'extend_existing': True}
+    
+    id = Column(String, primary_key=True)
+    product_type = Column(String, index=True)
+    product_name = Column(String)
+    price = Column(Float, nullable=False)
+    description = Column(Text, nullable=True)
+    image_url = Column(String, nullable=True)
+
+    category = relationship("CategoryModel", back_populates="products")
+    order_items = relationship("OrderItemModel", back_populates="product")
+    reviews = relationship("ReviewModel", back_populates="product")
 
 class ProductSizeModel(Base):
     __tablename__ = 'product_sizes'
+    __table_args__ = {'extend_existing': True}
+
     size_id = Column("id", Integer, primary_key=True)
     product_id = Column("product_id", String, ForeignKey('products.id'), nullable=False)
     size = Column("size", String)
     stock_quantity = Column("stock_quantity", Integer, nullable=False, default=0)
+

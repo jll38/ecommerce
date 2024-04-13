@@ -7,12 +7,13 @@ Base = declarative_base()
 
 class UserModel(Base):
     __tablename__ = 'users'
+    __table_args__ = {'extend_existing': True}
     
-    id = Column("id", Integer, primary_key=True, index=True)
-    username = Column("username", String, unique=True, index=True, nullable=False)
-    email = Column("email", String, unique=True, index=True, nullable=False)
-    hashed_password = Column("hashed_password", String, nullable=False)
-    is_active = Column("is_active", Boolean, default=True)
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True, nullable=False)
+    email = Column(String, unique=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    is_active = Column(Boolean, default=True)
 
-    orders = relationship("Order", back_populates="user")
-    reviews = relationship("Review", back_populates="author")
+    orders = relationship("OrderModel", back_populates="user")
+    reviews = relationship("ReviewModel", back_populates="author")
