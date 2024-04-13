@@ -1,12 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import AddToCart from "../../components/ui/buttons/AddToCart/AddToCart";
 
 import { getProductInfo } from "../../services/Product";
+
+import AddToCart from "../../components/ui/buttons/AddToCart/AddToCart";
+import RadioProduct from "../../components/ui/buttons/RadioProduct/RadioProduct";
+
 export default function ProductPage() {
   const { productID } = useParams();
   const [productInfo, setProductInfo] = React.useState<any>();
   const [loading, setLoading] = React.useState<boolean>(true);
+  
   React.useEffect(() => {
     const fetchProduct = async () => {
       console.log(productID);
@@ -44,12 +48,12 @@ export default function ProductPage() {
               <hr></hr>
               <div className="flex flex-col gap-2">
                 <h4 className="text-sm text-black/70">Color:</h4>
-                <button>Test</button>
+                <RadioProduct value={["Red", "Black", "Green", "White"]}/>
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">
                 <h4 className="text-sm text-black/70">Size:</h4>
-                <button>Test</button>
+                <RadioProduct value={["SM", "MD", "LG", "XL"]}/>
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">
