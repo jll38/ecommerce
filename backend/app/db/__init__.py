@@ -22,7 +22,6 @@ def get_db_session():
     session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     return session
 
-
 def create_tables():
     engine = get_db_engine()
-    Base.metadata.create_all(bind=engine, checkfirst=True)
+    Base.metadata.create_all(bind=engine)

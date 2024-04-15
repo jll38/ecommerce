@@ -3,7 +3,6 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db import Base
 
-
 class UserModel(Base):
     __tablename__ = 'users'
     __table_args__ = {'extend_existing': True}

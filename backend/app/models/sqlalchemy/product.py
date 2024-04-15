@@ -7,7 +7,8 @@ class ProductModel(Base):
     __tablename__ = 'products'
     __table_args__ = {'extend_existing': True}
     
-    id = Column(String, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    slug = Column(String)
     product_type = Column(String, index=True)
     product_name = Column(String)
     price = Column(Float, nullable=False)
@@ -23,7 +24,7 @@ class ProductSizeModel(Base):
     __table_args__ = {'extend_existing': True}
 
     size_id = Column("id", Integer, primary_key=True)
-    product_id = Column("product_id", String, ForeignKey('products.id'), nullable=False)
+    product_id = Column("product_id", Integer, ForeignKey('products.id'), nullable=False)
     size = Column("size", String)
     stock_quantity = Column("stock_quantity", Integer, nullable=False, default=0)
 
