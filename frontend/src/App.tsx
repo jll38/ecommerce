@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Helmet } from "react-helmet";
 
 import Navigation from "./components/shared/navigation/Navigation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
