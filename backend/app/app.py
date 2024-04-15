@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.product_router import product_router
 from app.services.user_service import User_Service
+from app.db import create_tables
 
 description = """
 Ecommerce  API 🔥
@@ -35,6 +36,7 @@ app.add_middleware(
 
 app.include_router(product_router)
 
+create_tables()
 
 @app.get("/")
 async def root():

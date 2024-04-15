@@ -1,9 +1,8 @@
 from sqlalchemy import Column, String, Float, Integer, Text, ForeignKey, DateTime, Table
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from datetime import datetime
+from app.db import Base
 
-Base = declarative_base()
 class ReviewModel(Base):
     __tablename__ = 'reviews'
     __table_args__ = {'extend_existing': True}

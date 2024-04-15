@@ -1,9 +1,7 @@
 from sqlalchemy import Column, String, Float, Integer, Text, ForeignKey, DateTime, Table
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from datetime import datetime
-
-Base = declarative_base()
+from app.db import Base
 
 class OrderModel(Base):
     __tablename__ = 'orders'
