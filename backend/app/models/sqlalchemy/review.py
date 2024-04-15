@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db import Base
 
-class ReviewModel(Base):
+class Review(Base):
     __tablename__ = 'reviews'
     __table_args__ = {'extend_existing': True}
     
@@ -13,5 +13,5 @@ class ReviewModel(Base):
     content = Column(Text, nullable=False)
     rating = Column(Integer, nullable=False)
     
-    product = relationship("ProductModel", back_populates="reviews")
-    author = relationship("UserModel", back_populates="reviews")
+    product = relationship("Product", back_populates="reviews")
+    author = relationship("User", back_populates="reviews")

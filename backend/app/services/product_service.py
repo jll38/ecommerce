@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from fastapi import APIRouter, FastAPI, HTTPException
 from app.db import get_db_session
+from app.models.sqlalchemy.product import Product
 # Placeholder for DB
 products_db = {
     "1": {
@@ -18,6 +19,10 @@ class Product_Service(BaseModel):
 
     @staticmethod
     def retrieve_product(product_id):
+        print(" ")
+        product_modle = db.query(Product).query.all()
+        print(" ")
+        print(product_modle)
         product = products_db.get(product_id)
         if not product:
             raise HTTPException(status_code=404, detail="Product not found")

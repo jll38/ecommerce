@@ -16,11 +16,10 @@ def get_db_engine():
         print(f"{Fore.RED}Error creating database engine: {e}{Fore.WHITE}")
         return None
 
-
 def get_db_session():
     engine = get_db_engine()
-    session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    return session
+    Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+    return Session()
 
 def create_tables():
     engine = get_db_engine()

@@ -5,11 +5,11 @@ from app.db import Base
 from .join_tables import product_categories
 
 
-class CategoryModel(Base):
+class Category(Base):
     __tablename__ = 'categories'
     
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(Text, nullable=True)
     
-    products = relationship("ProductModel", secondary=product_categories, back_populates="categories")
+    products = relationship("Product", secondary=product_categories, back_populates="categories")

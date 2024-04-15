@@ -4,7 +4,7 @@ from datetime import datetime
 from app.db import Base
 from .join_tables import product_categories
 
-class ProductModel(Base):
+class Product(Base):
     __tablename__ = 'products'
     
     id = Column(Integer, primary_key=True)
@@ -16,9 +16,12 @@ class ProductModel(Base):
     description = Column(Text, nullable=True)
     image_url = Column(String, nullable=True)
 
-    categories = relationship("CategoryModel", secondary=product_categories, back_populates="products")
+    categories = relationship("Category", secondary=product_categories, back_populates="products")
 
-class ProductSizeModel(Base):
+    def __repr__(self):
+        return f"Product(id={self.id}), slug={self.product_type}, product_type={self.product_type}, product_name={self.product_name}, price={self.price}, blur={self.blurb}, description={description}, image_url={image_url})"
+
+class ProductSize(Base):
     __tablename__ = 'product_sizes'
     __table_args__ = {'extend_existing': True}
 

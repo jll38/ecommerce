@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db import Base
 
-class UserModel(Base):
+class User(Base):
     __tablename__ = 'users'
     __table_args__ = {'extend_existing': True}
     
@@ -14,5 +14,5 @@ class UserModel(Base):
     salt = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
 
-    orders = relationship("OrderModel", back_populates="user")
-    reviews = relationship("ReviewModel", back_populates="author")
+    orders = relationship("Order", back_populates="user")
+    reviews = relationship("Review", back_populates="author")
