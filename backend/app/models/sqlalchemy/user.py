@@ -11,6 +11,7 @@ class UserModel(Base):
     username = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)
     hashed_password = Column(String, nullable=False)
+    salt = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
 
     orders = relationship("OrderModel", back_populates="user")

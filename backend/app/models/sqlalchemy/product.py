@@ -2,10 +2,10 @@ from sqlalchemy import Column, String, Float, Integer, Text, ForeignKey, DateTim
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db import Base
+from .join_tables import product_categories
 
 class ProductModel(Base):
     __tablename__ = 'products'
-    __table_args__ = {'extend_existing': True}
     
     id = Column(Integer, primary_key=True)
     slug = Column(String)
@@ -15,9 +15,7 @@ class ProductModel(Base):
     description = Column(Text, nullable=True)
     image_url = Column(String, nullable=True)
 
-    category = relationship("CategoryModel", back_populates="products")
-    order_items = relationship("OrderItemModel", back_populates="product")
-    reviews = relationship("ReviewModel", back_populates="product")
+    categories = relationship("CategoryModel", secondary=product_categories, back_populates="products")
 
 class ProductSizeModel(Base):
     __tablename__ = 'product_sizes'

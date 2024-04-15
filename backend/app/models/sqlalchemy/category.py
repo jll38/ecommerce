@@ -2,13 +2,14 @@ from sqlalchemy import Column, String, Float, Integer, Text, ForeignKey, DateTim
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db import Base
+from .join_tables import product_categories
+
 
 class CategoryModel(Base):
     __tablename__ = 'categories'
-    __table_args__ = {'extend_existing': True}
     
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(Text, nullable=True)
     
-    products = relationship("ProductModel", back_populates="category")
+    products = relationship("ProductModel", secondary=product_categories, back_populates="categories")
