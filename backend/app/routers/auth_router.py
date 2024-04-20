@@ -10,7 +10,7 @@ from app.services.user_service import UserServices
 router = APIRouter()
 
 # Registration route
-@router.post("/register", response_model=UserSchema)
+@router.post("/register")
 async def register(user: UserSchema):
     try:
         user_obj = await UserServices.register(user.dict())

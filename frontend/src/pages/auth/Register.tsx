@@ -6,7 +6,7 @@ import {
   Box,
   Container,
 } from "@mui/material";
-
+import { BACKEND_URL } from "../../constants";
 import AuthPage from "./AuthPage";
 
 export default function Register() {
@@ -17,8 +17,36 @@ export default function Register() {
   //@ts-ignore
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement registration logic
-    console.log("Register:", email, password, confirmPassword);
+  
+    if (password !== confirmPassword) {
+      // Handle password mismatch error
+      console.error('Passwords do not match');
+      return;
+    }
+  
+    try {
+      const userData = {
+        email,
+        password,
+      };
+  
+      const response = await fetch(`${BACKEND_URL}/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+  
+      const data = await response.json();
+      // Handle successful registration
+      console.log('Registration successful', data);
+    } catch (error) {
+      // Handle registration error
+      console.error('Registration error', error);
+    }
   };
 
   return (
@@ -77,6 +105,7 @@ export default function Register() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onSubmit={handleSubmit}
             >
               Register
             </Button>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Typography, TextField, Button, Box, Container } from "@mui/material";
 import AuthPage from "./AuthPage";
+import qs from "qs";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -9,8 +10,30 @@ export default function Login() {
   //@ts-ignore
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement login logic
-    console.log("Login:", email, password);
+
+    try {
+      const credentials = new URLSearchParams();
+      credentials.append("username", email);
+      credentials.append("password", password);
+
+      const response = await fetch("/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: credentials,
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("accessToken", data.access_token);
+      // Handle successful login
+      console.log("Login successful", data);
+    } catch (error) {
+      // Handle login error
+      console.error("Login error", error);
+    }
   };
 
   return (
