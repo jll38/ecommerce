@@ -5,3 +5,5 @@ SQLalchemy
 psycopg2-binary
 alembic
 dotenv
+jose
+passlib

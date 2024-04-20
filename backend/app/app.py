@@ -5,7 +5,6 @@ from app.routers.product_router import product_router
 from app.routers.cart_router import cart_router
 from app.routers.support_router import support_router
 
-from app.services.user_service import User_Service
 from app.db import create_tables
 
 description = """
