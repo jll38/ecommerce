@@ -20,6 +20,7 @@ class Cart_Item(Base):
     cart_id = Column(Integer, ForeignKey('carts.id'), nullable=False)
     product_size_id = Column(Integer, ForeignKey('product_sizes.id'), nullable=False)
     quantity = Column(Integer, nullable=False, default=1)
+    price = Column(Float, nullable=False, default=0.0)
 
     cart = relationship("Cart", back_populates="items")
     product_size = relationship("ProductSize", back_populates="cart_items")
