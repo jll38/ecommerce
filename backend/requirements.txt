@@ -4,3 +4,4 @@ pytest
 SQLalchemy
 psycopg2-binary
 alembic
+dotenv

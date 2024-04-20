@@ -20,7 +20,7 @@ class Product_Service(BaseModel):
     @staticmethod
     def retrieve_product(product_id):
         print(" ")
-        product_modle = db.query(Product).query.all()
+        product_modle = db.query(Product).all()
         print(" ")
         print(product_modle)
         product = products_db.get(product_id)

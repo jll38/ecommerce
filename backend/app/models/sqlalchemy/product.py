@@ -6,7 +6,7 @@ from .join_tables import product_categories
 
 class Product(Base):
     __tablename__ = 'products'
-    
+
     id = Column(Integer, primary_key=True)
     slug = Column(String)
     product_type = Column(String, index=True)
@@ -16,10 +16,10 @@ class Product(Base):
     description = Column(Text, nullable=True)
     image_url = Column(String, nullable=True)
 
+    reviews = relationship("Review", back_populates="product")
     categories = relationship("Category", secondary=product_categories, back_populates="products")
+    sizes = relationship("ProductSize", back_populates="product")
 
-    def __repr__(self):
-        return f"Product(id={self.id}), slug={self.product_type}, product_type={self.product_type}, product_name={self.product_name}, price={self.price}, blur={self.blurb}, description={description}, image_url={image_url})"
 
 class ProductSize(Base):
     __tablename__ = 'product_sizes'
@@ -30,3 +30,5 @@ class ProductSize(Base):
     size = Column("size", String)
     stock_quantity = Column("stock_quantity", Integer, nullable=False, default=0)
 
+    product = relationship("Product", back_populates="sizes")
+    cart_items = relationship("Cart_Item", back_populates="product_size")
