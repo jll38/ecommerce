@@ -2,6 +2,7 @@ uvicorn
 fastapi
 pytest
 SQLalchemy
+marshmallow-sqlalchemy
 psycopg2-binary
 alembic
 python-jose
