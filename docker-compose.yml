@@ -4,9 +4,11 @@ services:
   frontend:
     image: julianlechner/ecommerce-frontend
     ports:
-      - "80:80"
+      - "3000:80"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    environment:
+        - REACT_APP_BACKEND_URL = /api/
 
   backend:
     image: julianlechner/ecommerce-backend
@@ -57,3 +59,14 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
+
+  nginx:
+    depends_on:
+      - frontend
+      - backend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - 3050:80

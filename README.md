@@ -9,6 +9,7 @@ This is an e-commerce project built using React as the frontend, MaterialUI and 
 - **Database**: PostgreSQL
 - **Containerization**: Docker
 - **CI/CD**: GitHub Actions, Docker Hub
+- **Reverse Proxy**: Nginx
 - **Automatic Updates**: Watchtower
 
 ## Features

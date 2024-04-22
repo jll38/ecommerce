@@ -21,7 +21,7 @@ class UserServices:
     async def register(user_data: dict) -> User:
         existing_user = await User.find_one({"email": user_data["email"]})
         if existing_user:
-            raise ValueError("Email already registered")
+            raise ValueError("Email aready registered")
 
         hashed_password = pwd_context.hash(user_data["password"])
         user_obj = User(email=user_data["email"],
