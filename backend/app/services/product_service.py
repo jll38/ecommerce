@@ -1,42 +1,65 @@
-from pydantic import BaseModel
-from fastapi import APIRouter, FastAPI, HTTPException
+from typing import List, Dict
+from sqlalchemy.orm import Session
+from app.models.sqlalchemy import Product, ProductSize, Category
+from app.schemas.product_schemas import ProductBase, ProductResponse, CategoryResponse, ProductSizeResponse
 from app.db import get_db_session
-from app.models.sqlalchemy.product import Product
-# Placeholder for DB
-products_db = {
-    "1": {
-        "product_id": "1",
-        "product_type": "shirt",
-        "product_name": "Muscle Shirt",
-        "price": 29.99,  # Added required price field
-        "stock_quantity": 100  # Added required stock_quantity field
-    }
-}
-
+def map_product_to_response(self, db_product: Product) -> ProductResponse:
+        categories = [CategoryResponse(name=category.name, id=category.id) for category in db_product.categories]
+        sizes = [ProductSizeResponse(size=size.size, stock_quantity=size.stock_quantity, size_id=size.size_id) for size in db_product.sizes]
+        return ProductResponse(
+            id=db_product.id,
+            slug=db_product.slug,
+            product_type=db_product.product_type,
+            product_name=db_product.product_name,
+            price=db_product.price,
+            blurb=db_product.blurb,
+            description=db_product.description,
+            image_url=db_product.image_url,
+            created_at=db_product.created_at,
+            categories=categories,
+            sizes=sizes
+        )
 db = get_db_session()
+class Product_Service():
+    
+    # Create a new product
+    def create_product(product: ProductBase) -> Dict:
+        db_product = Product(**product.dict())
+        db.add(db_product)
+        db.commit()
+        db.refresh(db_product)
+        return map_product_to_response(db_product).dict()
 
-class Product_Service(BaseModel):
+    # Get a list of all products
+    def get_products() -> List[Dict]:
+        db_products = db.query(Product).all()
+        return [map_product_to_response(db_product).dict() for db_product in db_products]
 
-    @staticmethod
-    def retrieve_product(product_id):
-        print(" ")
-        product_modle = db.query(Product).all()
-        print(" ")
-        print(product_modle)
-        product = products_db.get(product_id)
-        if not product:
-            raise HTTPException(status_code=404, detail="Product not found")
-        links = {
-            "self": {
-                "href": f"http://localhost:8080/product/{product_id}"
-            },
-            "add_to_cart": {
-                "href": f"http://localhost:8080/cart/add/{product_id}",
-                "method": "POST"
-            },
-            "post_review": {
-                "href": f"http://localhost:8080/product/{product_id}/review",
-                "method": "POST"
-            }
-        }
-        return {**product, "_links": links}
+    # Get a single product by ID
+    def get_product(product_id: int) -> Dict:
+        db_product = db.query(Product).get(product_id)
+        if db_product:
+            return map_product_to_response(db_product).dict()
+        return {}
+
+    # Update a product
+    def update_product(product_id: int, product: ProductBase) -> Dict:
+        db_product = db.query(Product).get(product_id)
+        if db_product:
+            update_data = product.dict(exclude_unset=True)
+            for key, value in update_data.items():
+                setattr(db_product, key, value)
+            db.commit()
+            db.refresh(db_product)
+            return map_product_to_response(db_product).dict()
+        return {}
+
+    # Delete a product
+    def delete_product(product_id: int) -> bool:
+        db_product = db.query(Product).get(product_id)
+        if db_product:
+            db.delete(db_product)
+            db.commit()
+            return True
+        return False
+

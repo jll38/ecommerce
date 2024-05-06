@@ -1,11 +1,11 @@
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from app.models.pydantic.product import ProductSchema as Product
+from app.schemas.product_schemas import ProductBase
 
 cart_router = APIRouter()
 
 
-@cart_router.get("/cart", response_model=list[Product])
+@cart_router.get("/cart", response_model=list[ProductBase])
 def get_user_cart(user_id):
     pass
 

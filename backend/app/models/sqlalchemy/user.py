@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy.sql import func
 
+
 Base = declarative_base()
 
 class User(Base):
@@ -24,7 +25,7 @@ class User(Base):
     email_verified = Column(Boolean, default=False, nullable=False)
     cart = relationship("Cart", back_populates="user", uselist=False, cascade="all, delete-orphan")
     orders = relationship("Order", back_populates="user")
-    reviews = relationship("Review", back_populates="author")
+    reviews = relationship('Review', back_populates='user')
 
     def __repr__(self) -> str:
         """Provides a readable representation of a user object."""

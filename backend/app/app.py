@@ -6,7 +6,7 @@ from app.routers.cart_router import cart_router
 from app.routers.support_router import support_router
 
 from app.db import create_tables
-
+from app.models.sqlalchemy import *
 description = """
 Ecommerce  API 🔥
 

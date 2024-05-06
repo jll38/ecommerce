@@ -1,29 +1,19 @@
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from app.models.pydantic.product import ProductSchema as Product
+from app.schemas.product_schemas import ProductBase
+from app.models.sqlalchemy import Product
 from app.services.product_service import Product_Service
 
 product_router = APIRouter()
 
-#Placeholder for DB
-products_db = {
-    "1": {
-        "product_id": "1",
-        "product_type": "shirt",
-        "product_name": "Muscle Shirt",
-        "price": 29.99,  # Added required price field
-        "stock_quantity": 100  # Added required stock_quantity field
-    }
-}
-
-@product_router.get("/products", response_model=list[Product])
+@product_router.get("/products", response_model=list[ProductBase])
 def read_products():
     # Convert products_db to a list of Product models
     return [Product(**product) for product_id, product in products_db.items()]
 
-@product_router.get("/products/{product_id}", response_model=Product)
+@product_router.get("/products/{product_id}", response_model=ProductBase)
 def read_product(product_id: str):
-    return Product_Service.retrieve_product(product_id)
+    return Product_Service.get_product(int(product_id))
 
 @product_router.post("/product/{product_id}/cart")
 def add_product_to_cart(product_id: str):
