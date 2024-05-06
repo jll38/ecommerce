@@ -1,10 +1,13 @@
-# Fetching the latest node image on apline linux
+# Fetching the latest node image on alpine linux
 FROM node:alpine AS builder
 
-# Declaring env
+# Accept REACT_APP_BACKEND_URL as a build-time argument
+ARG REACT_APP_BACKEND_URL
+
+# Set it as an environment variable
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 ENV NODE_ENV production
 
-# Setting up the work directory
 WORKDIR /app
 
 # Installing dependencies
