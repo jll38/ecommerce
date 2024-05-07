@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   frontend:
-    image: julianlechner/ecommerce-frontend
+    image: julianlechner/ecommerce-frontend:latest
     ports:
       - "3000:80"
     depends_on:
@@ -13,7 +13,7 @@ services:
       - REACT_APP_BACKEND_URL=http://backend:8000/api/  # Corrected URL for internal Docker network access
 
   backend:
-    image: julianlechner/ecommerce-backend
+    image: julianlechner/ecommerce-backend:latest
     ports:
       - "8000:8000"
     depends_on:

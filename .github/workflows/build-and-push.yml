@@ -17,6 +17,9 @@ jobs:
           - context: frontend
             dockerfile: frontend/Dockerfile
             image_name: julianlechner/ecommerce-frontend
+          - context: nginx
+            dockerfile: nginx/Dockerfile
+            image_name: julianlechner/ecommerce-nginx
 
     steps:
       - name: Checkout code
@@ -46,8 +49,9 @@ jobs:
           file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ matrix.image_name }}:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          platforms: linux/amd64, linux/arm64
+          cache-from: type=registry,ref=${{ matrix.image_name }}:cache
+          cache-to: type=inline,mode=max
 
       - name: Verify the images
         run: docker images
