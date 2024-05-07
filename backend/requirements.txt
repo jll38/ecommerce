@@ -8,3 +8,4 @@ alembic
 python-jose
 passlib
 python-dotenv
+colorama

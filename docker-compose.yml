@@ -20,6 +20,8 @@ services:
       - postgres
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    env_file:
+      - ./backend/.env
     volumes:
       - "~/apps/backend:/var/lib/backend/data"
     
