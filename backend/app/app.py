@@ -23,7 +23,8 @@ app = FastAPI(title="E-Commerce API", description=description,
                   "name": "Julian Lechner",
                   "url": "https://jlechner.com",
                   "email": "julian@jlechner.com",
-              },)
+              },
+              root_path="/api")
 
 
 # User_Service.create_user(
