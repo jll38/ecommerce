@@ -20,12 +20,21 @@ export default function ProductCard({ product }: any) {
           title="green iguana"
         />
         <CardContent>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" fontSize={20} component="div">
             {product.product_name}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             {product.blurb}
           </Typography>
+          <Typography variant="h5" fontSize={16} component="div">
+            {product.sale_price ? <s>${product.price}</s> : `$${product.price}`}
+          </Typography>
+          {product.sale_price && (
+            <Typography variant="h5" fontSize={16} color="red" component="div">
+              {" "}
+              {product.sale_price}
+            </Typography>
+          )}
         </CardContent>
       </CardActionArea>
     </Card>
