@@ -42,7 +42,18 @@ export default function ProductPage() {
                   {productInfo.product_name}
                 </h2>
                 <div>⭐️⭐️⭐️⭐️⭐️</div>
-                <h3 className="text-xl">${productInfo.price}</h3>
+                <h3 className="text-xl">
+                  {productInfo.sale_price ? (
+                    <s>${productInfo.price}</s>
+                  ) : (
+                    `$${productInfo.price}`
+                  )}
+                </h3>
+                {productInfo.sale_price && (
+                  <h3 className="text-xl text-red-500">
+                   SALE ${productInfo.sale_price}
+                  </h3>
+                )}
                 <p className="text-sm text-black/70">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -85,7 +96,12 @@ export default function ProductPage() {
           Hear from our community
         </Typography>
         <div>⭐️⭐️⭐️⭐️⭐️</div>
-        <TextField multiline={true} rows={4} maxRows={4} sx={{width: "100%"}} />
+        <TextField
+          multiline={true}
+          rows={4}
+          maxRows={4}
+          sx={{ width: "100%" }}
+        />
         <Button variant="contained">Post Review</Button>
       </section>
     </main>

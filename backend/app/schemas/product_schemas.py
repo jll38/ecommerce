@@ -18,6 +18,7 @@ class ProductBase(BaseModel):
     blurb: Optional[str] = Field(None, example="A short description of the product")
     description: Optional[str] = Field(None, example="A detailed description of the product")
     image_url: Optional[str] = Field(None, example="http://example.com/image.png")
+    sale_price: Optional[float]  = Field(..., gt=0, example=9.99)
 
 class ProductCreate(ProductBase):
     # Here we do not include relationships, assuming that only base product data is needed for creation

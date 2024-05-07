@@ -22,7 +22,8 @@ def map_product_to_response(db_product: Product) -> ProductResponse:
         description=db_product.description,
         image_url=db_product.image_url,
         categories=categories,
-        sizes=sizes
+        sizes=sizes,
+        sale_price=db_product.sale_price
     )
 class Product_Service():
     

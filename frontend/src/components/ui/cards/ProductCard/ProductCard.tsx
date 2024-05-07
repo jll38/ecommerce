@@ -32,7 +32,7 @@ export default function ProductCard({ product }: any) {
           {product.sale_price && (
             <Typography variant="h5" fontSize={16} color="red" component="div">
               {" "}
-              {product.sale_price}
+              SALE ${product.sale_price}
             </Typography>
           )}
         </CardContent>
