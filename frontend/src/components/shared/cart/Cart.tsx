@@ -8,7 +8,9 @@ export default function Cart() {
       <button className="hover:opacity-70" onClick={() => {setOpen(!open)}}>
         <ShoppingBagOutlinedIcon />
       </button>
-      <SideDrawer open={open} setOpen={setOpen} />
+      <SideDrawer open={open} setOpen={setOpen}>
+        
+      </SideDrawer>
     </>
   );
 }
