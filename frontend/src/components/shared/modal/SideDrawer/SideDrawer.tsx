@@ -16,7 +16,7 @@ import { Typography } from "@mui/material";
 
 type Anchor = "right";
 
-export default function SideDrawer({ open, setOpen, children }: any) {
+export default function SideDrawer({ title, open, setOpen, children }: any) {
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -31,15 +31,24 @@ export default function SideDrawer({ open, setOpen, children }: any) {
     };
 
   const list = (anchor: Anchor) => (
-    <Box sx={{ width: 500 }} role="presentation">
-      <div style={{ height: 50, padding: 10, display: "flex", justifyContent: "end" }}>
+    <Box sx={{ width: 500, height: "100%" }} role="presentation">
+      <div
+        style={{
+          height: "auto",
+          padding: 10,
+          display: "flex",
+          width: "100%",
+          justifyContent:"space-between",
+          alignItems: "center",
+        }}
+      >
+        <Typography fontWeight={600}>{title}</Typography>
         <button onClick={toggleDrawer(false)}>
           <CloseIcon />
         </button>
       </div>
-      <Box>
-        {children}
-      </Box>
+      <Divider/>
+      <Box sx={{ padding: 4, height: "92%", position: "relative" }}>{children}</Box>
     </Box>
   );
 
