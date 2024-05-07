@@ -6,7 +6,8 @@ from app.db import get_db_session
 from fastapi import HTTPException
 from fastapi_pagination import Page, paginate
 from app import app
-
+import os
+from colorama import Fore
 
 db = get_db_session()
 def map_product_to_response(db_product: Product) -> ProductResponse:
@@ -47,6 +48,7 @@ class Product_Service():
     def get_product(product_slug: str):
         try:
             product = db.query(Product).filter(Product.slug == product_slug).one()
+            print(product)
             return product
         except Exception as e:
             db.rollback()  # Ensure to rollback on any error.

@@ -8,6 +8,8 @@ import RadioProduct from "../../components/ui/buttons/RadioProduct/RadioProduct"
 
 import { Typography } from "@mui/material";
 import { TextField, Button } from "@mui/material";
+import { AWS_S3_BASE_URL } from "../../constants";
+
 export default function ProductPage() {
   const { productID } = useParams();
   const [productInfo, setProductInfo] = React.useState<any>();
@@ -32,7 +34,11 @@ export default function ProductPage() {
           <div>Loading</div>
         ) : productInfo ? (
           <>
-            <aside className="w-full max-w-[600px] h-[600px]">img here</aside>
+            <aside className="w-full max-w-[600px] h-[600px]">
+              <figure>
+                <img src={AWS_S3_BASE_URL + productInfo.image_url}></img>
+              </figure>
+            </aside>
             <section
               id="purchase-info"
               className="w-full max-w-[400px] h-[600px] pt-2 px-0 flex flex-col gap-4"
@@ -51,12 +57,10 @@ export default function ProductPage() {
                 </h3>
                 {productInfo.sale_price && (
                   <h3 className="text-xl text-red-500">
-                   SALE ${productInfo.sale_price}
+                    SALE ${productInfo.sale_price}
                   </h3>
                 )}
-                <p className="text-sm text-black/70">
-                 {productInfo.blurb}
-                </p>
+                <p className="text-sm text-black/70">{productInfo.blurb}</p>
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">

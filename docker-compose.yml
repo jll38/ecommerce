@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   frontend:
@@ -6,6 +6,7 @@ services:
       context: ./frontend
       args:
         - REACT_APP_BACKEND_URL=http://localhost/api
+        - REACT_APP_AWS_S3_BASE_URL = https://jlechner-ecommerce.s3.amazonaws.com
     ports:
       - "3000:80"
     depends_on:
@@ -27,7 +28,7 @@ services:
       - ./backend/.env.docker
     volumes:
       - "~/apps/backend:/var/lib/backend/data"
-    
+
   postgres:
     image: postgres:16-alpine
     ports:
@@ -65,4 +66,4 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - "80:80"  # Exposing on port 80 for host
+      - "80:80" # Exposing on port 80 for host
