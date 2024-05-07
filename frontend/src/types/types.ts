@@ -38,4 +38,4 @@ export interface IUser {
 }
   
   
-  
+export default {}
