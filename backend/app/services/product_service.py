@@ -43,7 +43,7 @@ class Product_Service():
             return product
         except Exception as e:
             db.rollback()  # Ensure to rollback on any error.
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=404, detail="Product not found")
 
 
     # Update a product
