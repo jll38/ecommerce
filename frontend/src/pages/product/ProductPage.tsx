@@ -13,10 +13,8 @@ export default function ProductPage() {
   
   React.useEffect(() => {
     const fetchProduct = async () => {
-      console.log(productID);
       if (productID) {
         const product = await getProductInfo(productID);
-        console.log(product);
         setProductInfo(product);
         setLoading(false);
       }
