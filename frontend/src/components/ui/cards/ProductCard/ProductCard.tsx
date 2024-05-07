@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
+
+import { AWS_S3_BASE_URL } from "../../../../constants";
 export default function ProductCard({ product }: any) {
   return (
     <Card
@@ -16,7 +18,7 @@ export default function ProductCard({ product }: any) {
       <CardActionArea href={`/products/${product.slug}`}>
         <CardMedia
           sx={{ height: 200 }}
-          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+          image={AWS_S3_BASE_URL + product.image_url}
           title="green iguana"
         />
         <CardContent>
