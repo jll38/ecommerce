@@ -57,7 +57,7 @@ export default function ProductPage() {
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">
-                <AddToCart route={productInfo["_links"].add_to_cart} />
+                <AddToCart route={"/"} />
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">
