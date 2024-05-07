@@ -2,15 +2,18 @@ version: '3.9'
 
 services:
   frontend:
-    image: julianlechner/ecommerce-frontend:latest
+    build:
+      context: ./frontend
+      args:
+        - REACT_APP_BACKEND_URL=http://localhost/api
     ports:
       - "3000:80"
     depends_on:
       - backend
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    environment:
-      - REACT_APP_BACKEND_URL=http://backend:8000/api/  # Corrected URL for internal Docker network access
+    env_file:
+      - ./frontend/.env.docker
 
   backend:
     image: julianlechner/ecommerce-backend:latest
