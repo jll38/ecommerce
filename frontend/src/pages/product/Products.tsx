@@ -5,7 +5,8 @@ import { getProductList } from "../../services/Product";
 
 //Components
 import ProductCard from "../../components/ui/cards/ProductCard/ProductCard";
-
+import { Typography } from "@mui/material";
+import { Button } from "@mui/material";
 export default function Products() {
   const [products, setProducts] = React.useState<any>();
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -21,18 +22,25 @@ export default function Products() {
   }, []);
   return (
     <main>
-      <section id="product-info" className="flex flex-wrap gap-[3rem] justify-evenly">
+      <section id="filters">
+      <Button variant="outlined">Fit</Button>
+      <Button variant="outlined">Color</Button>
+        <Button variant="outlined">Price</Button>
+      </section>
+      <section
+        id="product-info"
+        className="flex flex-wrap gap-[3rem] justify-evenly"
+      >
         {loading ? (
           <div>Loading...</div>
         ) : (
           <>
-         
             {products ? (
               <>
                 {
                   //@ts-ignore
                   products.map((product, i) => (
-                    <ProductCard product={product}/>
+                    <ProductCard product={product} />
                   ))
                 }
               </>
