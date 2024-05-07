@@ -1,15 +1,14 @@
-from fastapi import APIRouter, FastAPI, HTTPException
+from fastapi import APIRouter, FastAPI, HTTPException, Query, Path
 from fastapi.responses import JSONResponse
 from app.schemas.product_schemas import ProductBase
 from app.models.sqlalchemy import Product
 from app.services.product_service import Product_Service
-
 product_router = APIRouter()
 
-@product_router.get("/products", response_model=list[ProductBase])
-def read_products():
+@product_router.get("/products")
+def read_products(page: int = 0, limit: int = 0):
     # Convert products_db to a list of Product models
-    return [Product(**product) for product_id, product in products_db.items()]
+    return Product_Service.get_products(page,limit)
 
 @product_router.get("/products/{product_slug}", response_model=ProductBase)
 def read_product(product_slug: str):

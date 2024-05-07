@@ -7,6 +7,9 @@ from app.routers.support_router import support_router
 
 from app.db import create_tables
 from app.models.sqlalchemy import *
+
+from fastapi_pagination import Page, add_pagination, paginate
+
 description = """
 Ecommerce  API 🔥
 
@@ -41,6 +44,7 @@ app.add_middleware(
 app.include_router(product_router)
 app.include_router(cart_router)
 app.include_router(support_router)
+add_pagination(app)
 
 create_tables()
 

@@ -4,6 +4,9 @@ from app.models.sqlalchemy import Product, ProductSize, Category
 from app.schemas.product_schemas import ProductBase, ProductResponse, CategoryResponse, ProductSizeResponse
 from app.db import get_db_session
 from fastapi import HTTPException
+from fastapi_pagination import Page, paginate
+from app import app
+
 
 db = get_db_session()
 def map_product_to_response(db_product: Product) -> ProductResponse:
@@ -32,10 +35,13 @@ class Product_Service():
         return map_product_to_response(db_product).dict()
 
     # Get a list of all products
-    def get_products() -> List[Dict]:
-        db_products = db.query(Product).all()
-        return [map_product_to_response(db_product).dict() for db_product in db_products]
-
+    def get_products(page: int = 0, limit: int = 10 ) -> List[Dict]:
+        try:
+            products = db.query(Product).offset(page * limit).limit(10).all()
+            return products
+        except Exception as e:
+            db.rollback()
+            raise HTTPException(status_code=500, detail="Error fetching products")
     # Get a single product by ID
     def get_product(product_slug: str):
         try:
