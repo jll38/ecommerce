@@ -37,9 +37,9 @@ class Product_Service():
         return [map_product_to_response(db_product).dict() for db_product in db_products]
 
     # Get a single product by ID
-    def get_product(product_id: int):
+    def get_product(product_slug: str):
         try:
-            product = db.query(Product).filter(Product.id == product_id).one()
+            product = db.query(Product).filter(Product.slug == product_slug).one()
             return product
         except Exception as e:
             db.rollback()  # Ensure to rollback on any error.
@@ -47,8 +47,8 @@ class Product_Service():
 
 
     # Update a product
-    def update_product(product_id: int, product: ProductBase) -> Dict:
-        db_product = db.query(Product).get(product_id)
+    def update_product(product_slug: str, product: ProductBase) -> Dict:
+        db_product = db.query(Product).get(product_slug)
         if db_product:
             update_data = product.dict(exclude_unset=True)
             for key, value in update_data.items():
@@ -59,8 +59,8 @@ class Product_Service():
         return {}
 
     # Delete a product
-    def delete_product(product_id: int) -> bool:
-        db_product = db.query(Product).get(product_id)
+    def delete_product(product_slug: str) -> bool:
+        db_product = db.query(Product).get(product_slug)
         if db_product:
             db.delete(db_product)
             db.commit()
