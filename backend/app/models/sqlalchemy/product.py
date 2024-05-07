@@ -13,6 +13,7 @@ class Product(Base):
     product_type = Column(String, index=True)
     product_name = Column(String)
     price = Column(Float, nullable=False)
+    sale_price = Column(Float, nullable=True)
     blurb = Column(Text, nullable=True)
     description = Column(Text, nullable=True)
     image_url = Column(String, nullable=True)
