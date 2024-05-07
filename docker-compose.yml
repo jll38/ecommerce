@@ -21,7 +21,7 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     env_file:
-      - ./backend/.env
+      - ./backend/.env.docker
     volumes:
       - "~/apps/backend:/var/lib/backend/data"
     
@@ -41,7 +41,7 @@ services:
     ports:
       - "5050:80"
     env_file:
-      - ./.env
+      - ./.env.docker
     volumes:
       - "~/apps/pgadmin:/var/lib/pgadmin"
 

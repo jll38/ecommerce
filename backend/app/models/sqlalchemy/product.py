@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db import Base
 from .join_tables import product_categories
+from .review import *
 
 class Product(Base):
     __tablename__ = 'products'

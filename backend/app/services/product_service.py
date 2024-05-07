@@ -3,23 +3,24 @@ from sqlalchemy.orm import Session
 from app.models.sqlalchemy import Product, ProductSize, Category
 from app.schemas.product_schemas import ProductBase, ProductResponse, CategoryResponse, ProductSizeResponse
 from app.db import get_db_session
-def map_product_to_response(self, db_product: Product) -> ProductResponse:
-        categories = [CategoryResponse(name=category.name, id=category.id) for category in db_product.categories]
-        sizes = [ProductSizeResponse(size=size.size, stock_quantity=size.stock_quantity, size_id=size.size_id) for size in db_product.sizes]
-        return ProductResponse(
-            id=db_product.id,
-            slug=db_product.slug,
-            product_type=db_product.product_type,
-            product_name=db_product.product_name,
-            price=db_product.price,
-            blurb=db_product.blurb,
-            description=db_product.description,
-            image_url=db_product.image_url,
-            created_at=db_product.created_at,
-            categories=categories,
-            sizes=sizes
-        )
+from fastapi import HTTPException
+
 db = get_db_session()
+def map_product_to_response(db_product: Product) -> ProductResponse:
+    categories = [CategoryResponse(name=category.name, id=category.id) for category in db_product.categories]
+    sizes = [ProductSizeResponse(size=size.size, stock_quantity=size.stock_quantity, size_id=size.size_id) for size in db_product.sizes]
+    return ProductResponse(
+        id=db_product.id,
+        slug=db_product.slug,
+        product_type=db_product.product_type,
+        product_name=db_product.product_name,
+        price=db_product.price,
+        blurb=db_product.blurb,
+        description=db_product.description,
+        image_url=db_product.image_url,
+        categories=categories,
+        sizes=sizes
+    )
 class Product_Service():
     
     # Create a new product
@@ -36,11 +37,14 @@ class Product_Service():
         return [map_product_to_response(db_product).dict() for db_product in db_products]
 
     # Get a single product by ID
-    def get_product(product_id: int) -> Dict:
-        db_product = db.query(Product).get(product_id)
-        if db_product:
-            return map_product_to_response(db_product).dict()
-        return {}
+    def get_product(product_id: int):
+        try:
+            product = db.query(Product).filter(Product.id == product_id).one()
+            return product
+        except Exception as e:
+            db.rollback()  # Ensure to rollback on any error.
+            raise HTTPException(status_code=500, detail=str(e))
+
 
     # Update a product
     def update_product(product_id: int, product: ProductBase) -> Dict:

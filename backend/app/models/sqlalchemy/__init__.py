@@ -4,6 +4,7 @@ from .review import Review
 from .product import Product, ProductSize
 from .order import Order, OrderItem
 from .category import Category
+from .cart import Cart, Cart_Item
 
 models_arr = [User, Review, Order, OrderItem,
-              Product, ProductSize, Category]
+              Product, ProductSize, Category, Cart, Cart_Item]

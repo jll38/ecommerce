@@ -1,17 +1,23 @@
-from sqlalchemy import Column, String, Float, Integer, Text, ForeignKey, DateTime, Table, Boolean
-from sqlalchemy.orm import relationship
-from datetime import datetime
+from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey, Integer, Float
+from sqlalchemy.orm import relationship, Mapped
 from app.db import Base
+from sqlalchemy.dialects.postgresql import UUID
+from typing import TYPE_CHECKING
+from datetime import datetime
+if TYPE_CHECKING:
+    from .user import User
+
+
 
 class Cart(Base):
     __tablename__ = 'carts'
-
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey('users.uuid'), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    user = relationship("User", back_populates="cart")
-    items = relationship("Cart_Item", back_populates="cart", cascade="all, delete-orphan")
+    user: Mapped["User"] = relationship("User", back_populates="cart", foreign_keys=[user_id])
+    items: Mapped["Cart_Item"] = relationship("Cart_Item", back_populates="cart", cascade="all, delete-orphan")
+
 
 class Cart_Item(Base):
     __tablename__ = 'cart_items'
