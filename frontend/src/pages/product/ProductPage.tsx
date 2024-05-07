@@ -55,8 +55,7 @@ export default function ProductPage() {
                   </h3>
                 )}
                 <p className="text-sm text-black/70">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                 {productInfo.blurb}
                 </p>
               </div>
               <hr></hr>
