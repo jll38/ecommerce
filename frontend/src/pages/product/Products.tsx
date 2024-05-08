@@ -23,8 +23,8 @@ export default function Products() {
   return (
     <main>
       <section id="filters">
-      <Button variant="outlined">Fit</Button>
-      <Button variant="outlined">Color</Button>
+        <Button variant="outlined">Fit</Button>
+        <Button variant="outlined">Color</Button>
         <Button variant="outlined">Price</Button>
       </section>
       <section

@@ -14,7 +14,7 @@ export default function AddToCart({ product, size, color }: IAddToCart) {
   const { cart, setCart } = useContext(CartContext);
 
   function addToCart() {
-    // Check if the cart already has the item
+    // Check if the cart already has the exact same item with matching size and color
     const existingCartItemIndex = cart.findIndex(
       (item) =>
         item.product.product_id === product.product_id &&
@@ -23,12 +23,12 @@ export default function AddToCart({ product, size, color }: IAddToCart) {
     );
 
     if (existingCartItemIndex >= 0) {
-      // If item exists, increase its quantity
+      // If item exists with same size and color, increase its quantity
       const newCart = [...cart];
       newCart[existingCartItemIndex].quantity += 1;
       setCart(newCart);
     } else {
-      // If item does not exist, add it to the cart
+      // If item does not exist or differs in size/color, add it as a new item to the cart
       const newCartItem = {
         product,
         quantity: 1,

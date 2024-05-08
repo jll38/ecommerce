@@ -3,8 +3,10 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SideDrawer from "../modal/SideDrawer/SideDrawer";
 import { Typography, Box, Button } from "@mui/material";
 import Divider from "@mui/material/Divider";
-
+import { AWS_S3_BASE_URL } from "../../../constants";
 import { CartContext } from "../../../App";
+
+import DeleteIcon from '@mui/icons-material/Delete';
 export default function Cart() {
   const [open, setOpen] = useState(false);
   const { cart, setCart } = useContext(CartContext);
@@ -23,7 +25,20 @@ export default function Cart() {
         <ShoppingBagOutlinedIcon />
       </button>
       <SideDrawer open={open} setOpen={setOpen} title="Your Cart">
-        <Typography>Blah Blah Blah</Typography>
+        {cart.map((cartItem, i) => (
+          <div className="border p-2 flex items-center gap-2">
+            <aside>
+              <figure>
+                <img width={100} src={AWS_S3_BASE_URL + cartItem.product.image_url} />
+              </figure>
+            </aside>
+            <div>
+              <Typography>{cartItem.product.product_name}</Typography>
+              <Typography color={"gray"}>{cartItem.color} | {cartItem.size}</Typography>
+              <Typography fontWeight={600} fontSize={14}>Qty: {cartItem.quantity}</Typography>
+            </div>
+          </div>
+        ))}
         <Box
           sx={{
             padding: 4,

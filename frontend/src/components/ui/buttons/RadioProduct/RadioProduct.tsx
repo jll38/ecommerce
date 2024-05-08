@@ -2,11 +2,11 @@ import React from "react";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-export default function RadioProduct({ value }: any) {
+export default function RadioProduct({ value, setState }: any) {
   const [assigned, setAssigned] = React.useState(null);
   //@ts-ignore
   const handleChange = (event, newAssigned) => {
-    setAssigned(newAssigned)
+    setState(newAssigned)
   };
   if (!value) return <></>;
   return (

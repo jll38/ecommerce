@@ -17,8 +17,8 @@ import { Product } from "../../types/types";
 export default function ProductPage() {
   const { productID } = useParams();
   const [productInfo, setProductInfo] = useState<Product>();
-  const [color, setColor] = useState<string>('red');
-  const [size, setSize] = useState<string>('sm');
+  const [color, setColor] = useState<string>("red");
+  const [size, setSize] = useState<string>("s");
   const [loading, setLoading] = useState<boolean>(true);
   const { cart, setCart } = useContext(CartContext);
 
@@ -34,7 +34,6 @@ export default function ProductPage() {
 
     fetchProduct();
   }, [productID]);
-
   return (
     <main>
       <section id="product-info" className="flex gap-[3rem] justify-evenly">
@@ -73,12 +72,12 @@ export default function ProductPage() {
               <hr></hr>
               <div className="flex flex-col gap-2">
                 <h4 className="text-sm text-black/70">Color:</h4>
-                <RadioProduct value={["Red", "Black", "Green", "White"]} />
+                <RadioProduct value={["Red", "Black", "Green", "White"]} setState={setColor} />
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">
                 <h4 className="text-sm text-black/70">Size:</h4>
-                <RadioProduct value={["SM", "MD", "LG", "XL"]} />
+                <RadioProduct value={["S", "M", "L", "XL"]} setState={setSize} />
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">

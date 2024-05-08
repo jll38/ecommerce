@@ -3,7 +3,7 @@ version: "3.9"
 services:
   frontend:
     build:
-      context: ./frontend
+      context: julianlechner/ecommerce-frontend:latest
       args:
         - REACT_APP_BACKEND_URL=http://localhost/api
         - REACT_APP_AWS_S3_BASE_URL = https://jlechner-ecommerce.s3.amazonaws.com
