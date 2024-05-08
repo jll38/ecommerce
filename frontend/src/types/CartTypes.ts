@@ -1,10 +1,15 @@
-import React, { createContext, useState, useContext, Dispatch, SetStateAction } from 'react';
-import { IProduct } from './types';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
+import { Product } from "./types";
 
 // Define the type for the cart
 export interface ICartItem {
-  id: number;
-  product: IProduct;
+  product: Product;
   quantity: number;
   size: string;
   color: string;
@@ -14,4 +19,23 @@ export interface ICartItem {
 export interface ICartContext {
   cart: ICartItem[];
   setCart: Dispatch<SetStateAction<ICartItem[]>>;
+}
+
+export class CartItem implements ICartItem {
+  product: Product;
+  quantity: number;
+  size: string;
+  color: string;
+
+  constructor(
+    product: Product,
+    quantity: number,
+    size: string,
+    color: string
+  ) {
+    this.product = product;
+    this.quantity = quantity;
+    this.size = size;
+    this.color = color;
+  }
 }

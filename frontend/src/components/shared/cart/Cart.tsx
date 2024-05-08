@@ -8,6 +8,10 @@ import { CartContext } from "../../../App";
 export default function Cart() {
   const [open, setOpen] = useState(false);
   const { cart, setCart } = useContext(CartContext);
+
+  React.useEffect(() => {
+    console.log(cart);
+  }, [cart]);
   return (
     <>
       <button

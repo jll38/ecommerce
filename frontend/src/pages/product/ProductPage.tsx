@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { getProductInfo } from "../../services/Product";
@@ -10,16 +10,24 @@ import { Typography } from "@mui/material";
 import { TextField, Button } from "@mui/material";
 import { AWS_S3_BASE_URL } from "../../constants";
 
+import { ICartContext, ICartItem } from "../../types/CartTypes";
+import { CartContext } from "../../App";
+import { Product } from "../../types/types";
+
 export default function ProductPage() {
   const { productID } = useParams();
-  const [productInfo, setProductInfo] = React.useState<any>();
-  const [loading, setLoading] = React.useState<boolean>(true);
+  const [productInfo, setProductInfo] = useState<Product>();
+  const [color, setColor] = useState<string>('red');
+  const [size, setSize] = useState<string>('sm');
+  const [loading, setLoading] = useState<boolean>(true);
+  const { cart, setCart } = useContext(CartContext);
 
   React.useEffect(() => {
     const fetchProduct = async () => {
       if (productID) {
         const response = await getProductInfo(productID);
-        setProductInfo(response);
+        const product = new Product(response);
+        setProductInfo(product);
         setLoading(false);
       }
     };
@@ -74,7 +82,7 @@ export default function ProductPage() {
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">
-                <AddToCart route={"/"} />
+                <AddToCart product={productInfo} size={size} color={color} />
               </div>
               <hr></hr>
               <div className="flex flex-col gap-2">
