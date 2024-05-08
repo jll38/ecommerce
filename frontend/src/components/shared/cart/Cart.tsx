@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SideDrawer from "../modal/SideDrawer/SideDrawer";
 import { Typography, Box, Button } from "@mui/material";
 import Divider from "@mui/material/Divider";
+
+import { CartContext } from "../../../App";
 export default function Cart() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const { cart, setCart } = useContext(CartContext);
   return (
     <>
       <button
