@@ -23,6 +23,7 @@ class Cart_Item(Base):
     __tablename__ = 'cart_items'
 
     id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey('products.id'), nullable=False)
     cart_id = Column(Integer, ForeignKey('carts.id'), nullable=False)
     product_size_id = Column(Integer, ForeignKey('product_sizes.id'), nullable=False)
     quantity = Column(Integer, nullable=False, default=1)
